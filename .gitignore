@@ -1,0 +1,6 @@
+venv/
+output/
+jars/
+jar/
+*.env
+__pycache__/
