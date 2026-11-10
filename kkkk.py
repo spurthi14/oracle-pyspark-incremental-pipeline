@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 import os
 import oracledb
-passwd = os.environ.get("ORA_PASS")
+passwd = os.environ.get("ORA_PAS")
 spark = (SparkSession.builder.master("local[*]").appName("incremental_load").config("spark.driver.extraClassPath", r"C:\Users\MYPC\Documents\ora-spark\jar\ojdbc17.jar").getOrCreate())
 max_dt = f"(select max(create_Date) as wm from customer) t "
 new_df = (spark.read.format("jdbc")
@@ -17,7 +17,7 @@ if wm is None:
     wm = "1900-01-01 00:00:00"
 else:
     wm = wm.strftime("%Y-%m-%d %H:%M:%S")
-qry = f"(select * from customer_source where create_Date> TIMESTAMP '{wm}') t"
+qry = f"(select * from customer_source where modified_Date> TIMESTAMP '{wm}') t"
 print(qry)
 
 new_df1 = (spark.read.format("jdbc")
