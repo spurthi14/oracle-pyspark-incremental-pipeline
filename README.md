@@ -48,3 +48,4 @@ On Windows, running PySpark needs `winutils.exe` and `hadoop.dll` in `C:\hadoop\
 - The watermark uses `create_date`, so edits to old rows are not detected. A `last_updated` column would fix this.
 - Add a PySpark cleaning step (trim names, lowercase emails) before the data lands.
 - <your own ideas>
+- Working on last_updated watermark
